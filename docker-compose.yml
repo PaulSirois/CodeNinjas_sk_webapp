@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      dockerfile: dockerfile
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "30:3030"
+    networks:
+      - postIT-network
+    hostname: postIT-react
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+  backend:
+    build:
+      dockerfile: dockerfile
+    volumes:
+      - ./backend:/app
+    ports:
+      - "81:8181"
+    networks:
+      - postIT-network
+    hostname: postIT-node
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+  db:
+    build:
+      dockerfile: mysql.Dockerfile
+    environment:
+      MYSQL_USER: postit-user
+      MYSQL_PASSWORD: postIT-super-secret-password
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/setup:/docker-entrypoint-initdb.d
+    ports:
+      - "70:7070"
+    networks:
+      - postIT-network
+    hostname: postIT-mysql
+    stdin_open: true
+    tty: true
+networks:
+  postIT-network:
