@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS postit;
-USE postit;
+CREATE DATABASE IF NOT EXISTS cnSkManagement;
+USE cnSkManagement;
 CREATE TABLE IF NOT EXISTS users
         (id_bin binary(16),
         id_text varchar(36) generated always as (
@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS users
         ) virtual,
         name varchar(200) NOT NULL UNIQUE,
         password varchar(200) NOT NULL,
+        role ENUM('sensei', 'front-desk', 'admin'),
         PRIMARY KEY (id_bin));
 CREATE TABLE IF NOT EXISTS posts
         (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
