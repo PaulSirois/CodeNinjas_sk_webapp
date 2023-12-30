@@ -17,21 +17,24 @@ class MyApp extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              //card
               Padding(
                 padding: EdgeInsets.only(left: 20.0),
                 child: SizedBox(
                   height: 950,
-                  width: 250,
+                  width: 220,
                   child: Card(
                     color: Color.fromRGBO(255, 255, 255, 1),
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        //These are for anything that is inside the white card
                         children: [
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(height: 30),
                               Align(
                                 alignment: Alignment.topCenter,
                                 child: Icon(
@@ -39,20 +42,27 @@ class MyApp extends StatelessWidget {
                                   size: 60,
                                 ),
                               ),
-                              SizedBox(width: 10),
                               Align(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  'Admin',
-                                  style: TextStyle(fontSize: 30),
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: SizedBox(
+                                    child: Text(
+                                      'Admin',
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 30),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(width: 0),
                               Align(
                                 alignment: Alignment.topCenter,
                                 child: Icon(
@@ -60,12 +70,18 @@ class MyApp extends StatelessWidget {
                                   size: 60,
                                 ),
                               ),
-                              SizedBox(width: 10),
                               Align(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  'Ninjas',
-                                  style: TextStyle(fontSize: 30),
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: SizedBox(
+                                    child: Text(
+                                      'Ninjas',
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
