@@ -1,48 +1,51 @@
 version: "3.9"
 services:
+
   frontend:
-    build:
-      dockerfile: dockerfile
+    image: ubuntu:latest
     volumes:
       - ./frontend:/app
     ports:
-      - "30:3030"
+      - "50:5050"
     networks:
-      - postIT-network
-    hostname: postIT-react
+      - cnManagementNetwork
+    hostname: cnManagement-frontend
     depends_on:
       - db
     stdin_open: true
     tty: true
+
   backend:
-    build:
-      dockerfile: dockerfile
+    image: node:latest
     volumes:
       - ./backend:/app
     ports:
       - "81:8181"
     networks:
-      - postIT-network
-    hostname: postIT-node
+      - cnManagementNetwork
+    hostname: cnManagement-node
     depends_on:
       - db
     stdin_open: true
     tty: true
+
   db:
-    build:
-      dockerfile: mysql.Dockerfile
+    image: mysql:latest
     environment:
-      MYSQL_USER: postit-user
-      MYSQL_PASSWORD: postIT-super-secret-password
+      MYSQL_USER: cnSensei
+      MYSQL_PASSWORD: cnSenseiUser
+      MYSQL_ROOT_PASSWORD: cnManagementAdmin
+      MYSQL_TCP_PORT: 7070
     volumes:
       - ./db/data:/var/lib/mysql
       - ./db/setup:/docker-entrypoint-initdb.d
     ports:
       - "70:7070"
     networks:
-      - postIT-network
-    hostname: postIT-mysql
+      - cnManagementNetwork
+    hostname: cnManagement-mysql
     stdin_open: true
     tty: true
+
 networks:
-  postIT-network:
+  cnManagementNetwork:
