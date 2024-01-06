@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './Ninjas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -103,6 +104,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
+              Ninjas(),
             ],
           ),
         ),
