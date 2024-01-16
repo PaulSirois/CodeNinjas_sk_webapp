@@ -15,6 +15,11 @@ CREATE TABLE IF NOT EXISTS users
         password varchar(200) NOT NULL,
         role ENUM('sensei', 'front-desk', 'admin'),
         PRIMARY KEY (id_bin));
+CREATE TABLE IF NOT EXISTS new_senseis (
+    name varchar(200) NOT NULL UNIQUE,
+    role ENUM('sensei', 'front-desk', 'admin'),
+    FOREIGN KEY(name) REFERENCES users(name),
+    FOREIGN KEY(role) REFERENCES users(role));
 CREATE TABLE IF NOT EXISTS posts
         (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         id_user binary(16) NOT NULL,
@@ -24,17 +29,6 @@ CREATE TABLE IF NOT EXISTS posts
         up_votes INT DEFAULT 0,
         PRIMARY KEY (id),
         FOREIGN KEY (id_user) REFERENCES users(id_bin));
-CREATE TABLE IF NOT EXISTS comments (
-        id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-        id_user binary(16) NOT NULL,
-        id_post INT UNSIGNED NOT NULL,
-        id_host INT UNSIGNED,
-        body TEXT NOT NULL,
-        time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (id),
-        FOREIGN KEY (id_user) REFERENCES users(id_bin),
-        FOREIGN KEY (id_post) REFERENCES posts(id),
-        FOREIGN KEY (id_host) REFERENCES comments(id));
 INSERT IGNORE INTO users (id_bin, name, password) VALUES (UNHEX(REPLACE(UUID(),'-','')), 'SUPERUSER', 'ADMINPASSWORD');
 CREATE USER 'postit-user'@'localhost' IDENTIFIED BY 'postIT-super-secret-password';
 GRANT SELECT, INSERT ON postit.* TO 'postit-user'@'localhost';

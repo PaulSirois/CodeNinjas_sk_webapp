@@ -1,22 +1,18 @@
-/* env */
-require('dotenv').config();
-
-/* express */
+/**********
+* IMPORTS *
+***********/
+require('dotenv').config(); // allow .env file
 const express = require("express");
-const app = express();
-
-/* parse */
-app.use(express.json());
-
-/* cors */
-const cors = require("cors");
-app.use(cors());
-
-/* database */
+const app = express(); // instantiate express app
+app.use(express.json()); // use json format
+const cors = require("cors"); // cross-origin resource sharing
+app.use(cors()); // use cors
 const mysql = require("mysql2");
-
-/* jwt */
 const jwt = require("jsonwebtoken");
+
+/*******************************
+* DATABASE AND TEST CONNECTION *
+********************************/
 
 const db = mysql.createPool({
     host: "localhost",
@@ -26,6 +22,42 @@ const db = mysql.createPool({
     port: 3306,
 });
 
+db.getConnection((err, connection) => {
+    if (err) return console.log(err);
+    console.log("Test connection to DB successful!");
+    connection.release();
+});
+
+/*******************
+* LOGIN AND SIGNUP *
+********************/
+
+app.post('/signup-request', (req, res) => {
+    const val = [req.body.username, req.body.password];
+
+    const query =
+        `INSERT INTO users (id_bin, name, password) VALUES (UNHEX(REPLACE(UUID(),'-','')), ?, ?)`;
+
+    db.getConnection((err, connection) => {
+        connection.query(query, (err, data) => {
+            connection.release();
+            if (err) {
+                if (err.code === 'ER_DUP_ENTRY') { // Duplicate entry error (username already exists)
+                    res.json({status: 400, message: 'Username already taken'});
+                } else {
+                    console.error('Error inserting user:', err);
+                    res.json({status: 500, message: 'Error registering user'});
+                }
+            } else {
+                res.json({status: 201, message: 'User registered successfully'});
+            }
+        });
+    });
+});
+
+app.post('/admin/createUser',(req, res) => {
+
+});
 
 app.post('/login-request', (req, res) => {
     const val = [req.body.username, req.body.password];
@@ -45,10 +77,12 @@ app.post('/login-request', (req, res) => {
                     process.env.ACCESS_TOKEN_SECRET,
                     {expiresIn: '3h'}
                 );
-                return res.json({status: 200, accessToken: accessToken});
+                return res.json({status: 201, accessToken: accessToken});
             }
         });
     });
 });
+
+// ************************************************************************* END OF LOGIN AND SIGNUP
 
 // TODO: Create new ninjas method
