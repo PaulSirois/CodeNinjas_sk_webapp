@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './Ninjas.dart';
+import './ninjas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,102 +10,119 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(24, 128, 179, 1),
+        backgroundColor: const Color.fromRGBO(24, 128, 179, 1),
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              //card
               Padding(
-                padding: EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 20.0),
                 child: SizedBox(
                   height: 950,
                   width: 220,
                   child: Card(
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                     child: Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        //These are for anything that is inside the white card
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 30),
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Icon(
-                                  Icons.account_circle,
-                                  size: 60,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: SizedBox(
-                                    child: Text(
-                                      'Admin',
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          _buildIconButton(
+                            icon: Icons.account_circle,
+                            label: 'Admin',
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            onPressed: () {
+                              // what happens when the admins button is pressed
+                            },
                           ),
-                          SizedBox(height: 30),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 0),
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Icon(
-                                  Icons.people,
-                                  size: 60,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: SizedBox(
-                                    child: Text(
-                                      'Ninjas',
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          _buildIconButton(
+                            icon: Icons.people,
+                            label: 'Ninjas',
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            onPressed: () {
+                              // what happens when the ninjas button is pressed
+                            },
                           ),
-                          Spacer(),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              'Logout',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          const Spacer(),
+                          _buildLogoutButton(),
                         ],
                       ),
                     ),
                   ),
                 ),
               ),
-              NinjasTable(),
+              const Expanded(
+                child: Center(
+                  child: NinjasTable(),
+                ),
+              ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIconButton({
+    required IconData icon,
+    required String label,
+    required double fontSize,
+    required FontWeight fontWeight,
+    required VoidCallback onPressed,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 30),
+        Align(
+          alignment: Alignment.topCenter,
+          child: Icon(
+            icon,
+            size: 60,
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: ElevatedButton(
+              onPressed: onPressed,
+              style: ElevatedButton.styleFrom(
+                shadowColor: Colors.transparent,
+                elevation: 0,
+                padding: EdgeInsets.zero,
+              ),
+              child: SizedBox(
+                child: Text(
+                  label,
+                  style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLogoutButton() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: TextButton(
+        onPressed: () {
+          // what happens when the logout button is pressed
+        },
+        child: const Text(
+          'Logout',
+          style: TextStyle(
+            fontSize: 30,
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
