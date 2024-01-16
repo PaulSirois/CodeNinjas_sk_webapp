@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Ninjas extends StatelessWidget {
-  const Ninjas({super.key});
+class NinjasTable extends StatelessWidget {
+  const NinjasTable({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,43 +17,9 @@ class Ninjas extends StatelessWidget {
         TableRow(
           children: <Widget>[
             Container(
-              height: 32,
-              color: Colors.green,
-            ),
-            TableCell(
-              verticalAlignment: TableCellVerticalAlignment.top,
-              child: Container(
-                height: 32,
-                width: 32,
-                color: Colors.red,
-              ),
-            ),
-            Container(
-              height: 64,
-              color: Colors.blue,
-            ),
-          ],
-        ),
-        TableRow(
-          decoration: const BoxDecoration(
-            color: Colors.grey,
-          ),
-          children: <Widget>[
-            Container(
-              height: 64,
-              width: 128,
-              color: Colors.purple,
-            ),
-            Container(
-              height: 32,
-              color: Colors.yellow,
-            ),
-            Center(
-              child: Container(
-                height: 32,
-                width: 32,
-                color: Colors.orange,
-              ),
+              color: const Color.fromARGB(255, 255, 255, 255),
+              height: 175,
+              width: 450,
             ),
           ],
         ),

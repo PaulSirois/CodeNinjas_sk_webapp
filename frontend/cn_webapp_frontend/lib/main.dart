@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              Ninjas(),
+              NinjasTable(),
             ],
           ),
         ),
