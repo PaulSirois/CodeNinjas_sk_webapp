@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS posts
         up_votes INT DEFAULT 0,
         PRIMARY KEY (id),
         FOREIGN KEY (id_user) REFERENCES users(id_bin));
-REPLACE INTO users (id_bin, name, password, role) VALUES (UNHEX(REPLACE(UUID(),'-','')), 'SUPERUSER', 'ADMINPASSWORD', 'admin') ON DUPLICATE KEY UPDATE ;
+REPLACE INTO users (id_bin, name, password, role) VALUES (UNHEX(REPLACE(UUID(),'-','')), 'SUPERUSER', 'ADMINPASSWORD', 'admin');
 # CREATE USER 'postit-user'@'localhost' IDENTIFIED BY 'postIT-super-secret-password';
 # GRANT SELECT, INSERT ON postit.* TO 'postit-user'@'localhost';
 # FLUSH PRIVILEGES;
