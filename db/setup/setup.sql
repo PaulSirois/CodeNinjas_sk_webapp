@@ -15,21 +15,23 @@ CREATE TABLE IF NOT EXISTS users
         password varchar(200) NOT NULL,
         role ENUM('sensei', 'front-desk', 'admin'),
         PRIMARY KEY (id_bin));
-CREATE TABLE IF NOT EXISTS new_senseis (
-    name varchar(200) NOT NULL UNIQUE,
-    role ENUM('sensei', 'front-desk', 'admin'),
-    FOREIGN KEY(name) REFERENCES users(name),
-    FOREIGN KEY(role) REFERENCES users(role));
-CREATE TABLE IF NOT EXISTS posts
-        (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-        id_user binary(16) NOT NULL,
-        topic varchar(100) NOT NULL,
-        body TEXT NOT NULL,
-        time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-        up_votes INT DEFAULT 0,
-        PRIMARY KEY (id),
-        FOREIGN KEY (id_user) REFERENCES users(id_bin));
-INSERT IGNORE INTO users (id_bin, name, password) VALUES (UNHEX(REPLACE(UUID(),'-','')), 'SUPERUSER', 'ADMINPASSWORD');
-CREATE USER 'postit-user'@'localhost' IDENTIFIED BY 'postIT-super-secret-password';
-GRANT SELECT, INSERT ON postit.* TO 'postit-user'@'localhost';
-FLUSH PRIVILEGES;
+# CREATE TABLE IF NOT EXISTS new_senseis (
+#     name varchar(200) NOT NULL UNIQUE,
+#     role ENUM('sensei', 'front-desk', 'admin'),
+#     PRIMARY KEY (name),
+#     FOREIGN KEY(name) REFERENCES users(name),
+#     FOREIGN KEY(role) REFERENCES users(role));
+# CREATE TABLE IF NOT EXISTS posts
+#         (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#         id_user binary(16) NOT NULL,
+#         topic varchar(100) NOT NULL,
+#         body TEXT NOT NULL,
+#         time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+#         up_votes INT DEFAULT 0,
+#         PRIMARY KEY (id),
+#         FOREIGN KEY (id_user) REFERENCES users(id_bin));
+INSERT INTO users (id_bin, name, password, role) VALUES (UNHEX(REPLACE(UUID(),'-','')), 'SUPERUSER', 'ADMINPASSWORD', 'admin')
+ON DUPLICATE KEY UPDATE id_bin=UNHEX(REPLACE(UUID(),'-',''));
+# CREATE USER 'postit-user'@'localhost' IDENTIFIED BY 'postIT-super-secret-password';
+# GRANT SELECT, INSERT ON postit.* TO 'postit-user'@'localhost';
+# FLUSH PRIVILEGES;
