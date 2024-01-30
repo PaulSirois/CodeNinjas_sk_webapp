@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
                             label: 'Admin',
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             onPressed: () {
                               // what happens when the admins button is pressed
                             },
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
     required double fontSize,
     required FontWeight fontWeight,
     required VoidCallback onPressed,
+    Color color = Colors.black, // Default color is black
   }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +102,8 @@ class MyApp extends StatelessWidget {
               child: SizedBox(
                 child: Text(
                   label,
-                  style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
+                  style: TextStyle(
+                      fontSize: fontSize, fontWeight: fontWeight, color: color),
                 ),
               ),
             ),
