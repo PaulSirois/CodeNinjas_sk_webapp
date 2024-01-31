@@ -69,9 +69,8 @@ class NinjasTable extends StatelessWidget {
         child: const SizedBox(
           height: 250,
           child: Center(
-            // Add text or icons inside the button here
-            child: Text('Button'),
-          ),
+              // Add text or icons inside the button here
+              ),
         ),
       ),
     );
