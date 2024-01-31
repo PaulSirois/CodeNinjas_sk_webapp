@@ -33,30 +33,64 @@ db.getConnection((err, connection) => {
 ********************/
 
 app.post('/signup-request', (req, res) => {
-    const val = [req.body.username, req.body.password];
+    const val = [req.body.username, req.body.password, req.body.role];
 
+    const queryCheck = `SELECT * FROM new_senseis WHERE name = ?`;
     const query =
-        `INSERT INTO users (id_bin, name, password) VALUES (UNHEX(REPLACE(UUID(),'-','')), ?, ?)`;
+        `INSERT INTO users (id_bin, name, password, role) VALUES (UNHEX(REPLACE(UUID(),'-','')), ?, ?, ?)`;
 
     db.getConnection((err, connection) => {
-        connection.query(query, (err, data) => {
-            connection.release();
+        connection.query(queryCheck, [val[0]], (err, data) => {
             if (err) {
-                if (err.code === 'ER_DUP_ENTRY') { // Duplicate entry error (username already exists)
-                    res.json({status: 400, message: 'Username already taken'});
-                } else {
-                    console.error('Error inserting user:', err);
-                    res.json({status: 500, message: 'Error registering user'});
-                }
-            } else {
-                res.json({status: 201, message: 'User registered successfully'});
+                console.error('Error checking for user in new_senseis:', err);
+                res.json({status: 500, message: err});
             }
+            if (!data.length) {
+                console.log('No user in new_senseis with name:', val[0]);
+                res.json({status: 400, message: `No user created with name: ${val[0]}`});
+            } else {
+                connection.query(query, val, (err, data) => {
+                    if (err) {
+                        console.error('Error inserting user into users:', err);
+                        res.json({status: 500, message: err});
+                    } else {
+                        res.json({status: 200, message: 'User registered successfully!'});
+                    }
+                });
+            }
+            connection.release();
         });
     });
 });
 
 app.post('/admin/createUser',(req, res) => {
+    const val = [req.body.username, req.body.role];
 
+    const queryCheck = `SELECT name FROM users WHERE name = ?`
+    const query = `INSERT INTO new_senseis (name, role) VALUES (?, ?) ON DUPLICATE KEY UPDATE role=VALUES(role)`;
+
+    db.getConnection((err, connection) => {
+        connection.query(queryCheck, [val[0]], (err, data) => {
+            if (err) {
+                console.error('Error checking for user in users:', err);
+                res.json({status: 500, message: err});
+            }
+            if (data.length) {
+                console.log('User already registered in users with name:', val[0]);
+                res.json({status: 400, message: `User already registered with name: ${val[0]}`});
+            } else {
+                connection.query(query, val, (err, data) => {
+                    if (err) {
+                        console.error('Error inserting user:', err);
+                        res.json({status: 500, message: 'Error creating user'});
+                    } else {
+                        res.json({status: 200, message: 'User created successfully by admin'});
+                    }
+                });
+            }
+            connection.release();
+        });
+    });
 });
 
 app.post('/login-request', (req, res) => {
