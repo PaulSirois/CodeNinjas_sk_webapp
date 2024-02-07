@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS new_senseis (
     name varchar(200) NOT NULL UNIQUE,
     role ENUM('sensei', 'front-desk', 'admin'),
     PRIMARY KEY (name));
-# CREATE TABLE IF NOT EXISTS posts
+# CREATE TABLE IF NOT EXISTS ninjas
 #         (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 #         id_user binary(16) NOT NULL,
 #         topic varchar(100) NOT NULL,
