@@ -9,26 +9,34 @@ class LogInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(24, 128, 179, 1),
+        backgroundColor: const Color.fromRGBO(24, 128, 179, 1),
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: Text(
-                    'Login',
-                    style:
-                        TextStyle(fontSize: 240, fontWeight: FontWeight.bold),
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/bg.png'),
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      'Login',
+                      style:
+                          TextStyle(fontSize: 240, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
