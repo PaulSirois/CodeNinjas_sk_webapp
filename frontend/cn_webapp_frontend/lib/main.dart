@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
     required double fontSize,
     required FontWeight fontWeight,
     required VoidCallback onPressed,
-    Color color = Colors.black, // Default color is black
+    Color color = Colors.black,
   }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +95,6 @@ class MyApp extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                shadowColor: Colors.transparent,
                 elevation: 0,
                 padding: EdgeInsets.zero,
               ),

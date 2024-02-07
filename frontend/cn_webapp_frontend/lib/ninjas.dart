@@ -12,7 +12,7 @@ class NinjasTable extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment(-.92, 0),
               child: Text(
                 'Most Recent',
                 style: TextStyle(
@@ -23,12 +23,12 @@ class NinjasTable extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: Table(
               columnWidths: const <int, TableColumnWidth>{
-                0: FixedColumnWidth(500),
-                1: FixedColumnWidth(500),
-                2: FixedColumnWidth(500),
+                0: FixedColumnWidth(400),
+                1: FixedColumnWidth(400),
+                2: FixedColumnWidth(400),
               },
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               children: <TableRow>[
@@ -58,7 +58,7 @@ class NinjasTable extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: ElevatedButton(
         onPressed: () {
-          // Define what happens when the button is pressed
+          // what happens when the button is pressed
         },
         style: ElevatedButton.styleFrom(
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -67,7 +67,7 @@ class NinjasTable extends StatelessWidget {
           ),
         ),
         child: const SizedBox(
-          height: 250,
+          height: 200,
           child: Center(
               // Add text or icons inside the button here
               ),
