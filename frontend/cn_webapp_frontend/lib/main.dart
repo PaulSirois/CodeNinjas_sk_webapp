@@ -13,6 +13,24 @@ class LogInPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromRGBO(24, 128, 179, 1),
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    'Login',
+                    style:
+                        TextStyle(fontSize: 240, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
