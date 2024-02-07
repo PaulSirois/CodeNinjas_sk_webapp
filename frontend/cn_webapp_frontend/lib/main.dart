@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(const LogInPage());
+}
+
 class LogInPage extends StatelessWidget {
   const LogInPage({super.key});
 
@@ -8,7 +12,7 @@ class LogInPage extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromRGBO(24, 128, 179, 1),
+        backgroundColor: Color.fromRGBO(24, 128, 179, 1),
       ),
     );
   }
