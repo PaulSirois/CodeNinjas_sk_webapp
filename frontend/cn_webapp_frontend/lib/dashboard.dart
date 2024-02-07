@@ -6,60 +6,57 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color.fromRGBO(24, 128, 179, 1),
-        body: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: SizedBox(
-                  height: 950,
-                  width: 220,
-                  child: Card(
-                    color: const Color.fromRGBO(255, 255, 255, 1),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildIconButton(
-                            icon: Icons.account_circle,
-                            label: 'Admin',
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 0, 0, 0),
-                            onPressed: () {
-                              // what happens when the admins button is pressed
-                            },
-                          ),
-                          _buildIconButton(
-                            icon: Icons.people,
-                            label: 'Ninjas',
-                            fontSize: 30,
-                            fontWeight: FontWeight.w400,
-                            onPressed: () {
-                              // what happens when the ninjas button is pressed
-                            },
-                          ),
-                          const Spacer(),
-                          _buildLogoutButton(),
-                        ],
-                      ),
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(24, 128, 179, 1),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: SizedBox(
+                height: 950,
+                width: 220,
+                child: Card(
+                  color: const Color.fromRGBO(255, 255, 255, 1),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildIconButton(
+                          icon: Icons.account_circle,
+                          label: 'Admin',
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromARGB(255, 0, 0, 0),
+                          onPressed: () {
+                            // what happens when the admins button is pressed
+                          },
+                        ),
+                        _buildIconButton(
+                          icon: Icons.people,
+                          label: 'Ninjas',
+                          fontSize: 30,
+                          fontWeight: FontWeight.w400,
+                          onPressed: () {
+                            // what happens when the ninjas button is pressed
+                          },
+                        ),
+                        const Spacer(),
+                        _buildLogoutButton(),
+                      ],
                     ),
                   ),
                 ),
               ),
-              const Expanded(
-                child: Center(
-                  child: NinjasTable(),
-                ),
+            ),
+            const Expanded(
+              child: Center(
+                child: NinjasTable(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
