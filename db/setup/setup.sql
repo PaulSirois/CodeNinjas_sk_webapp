@@ -19,15 +19,10 @@ CREATE TABLE IF NOT EXISTS new_senseis (
     name varchar(200) NOT NULL UNIQUE,
     role ENUM('sensei', 'front-desk', 'admin'),
     PRIMARY KEY (name));
-# CREATE TABLE IF NOT EXISTS ninjas
-#         (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-#         id_user binary(16) NOT NULL,
-#         topic varchar(100) NOT NULL,
-#         body TEXT NOT NULL,
-#         time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-#         up_votes INT DEFAULT 0,
-#         PRIMARY KEY (id),
-#         FOREIGN KEY (id_user) REFERENCES users(id_bin));
+CREATE TABLE IF NOT EXISTS ninjas
+        (name varchar(100),
+        belt enum('white', 'yellow', 'orange', 'green', 'blue', 'purple', 'brown', 'red', 'black'),
+        current_activity varchar(10));
 INSERT INTO users (id_bin, name, password, role) VALUES (UNHEX(REPLACE(UUID(),'-','')), 'SUPERUSER', 'ADMINPASSWORD', 'admin')
 ON DUPLICATE KEY UPDATE id_bin=UNHEX(REPLACE(UUID(),'-',''));
 # CREATE USER 'postit-user'@'localhost' IDENTIFIED BY 'postIT-super-secret-password';
