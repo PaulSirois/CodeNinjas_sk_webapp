@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-//import 'dashboard.dart';
+import 'dashboard.dart';
 
 void main() {
-  runApp(const LogInPage());
+  runApp(const MaterialApp(
+    home: LogInPage(),
+  ));
 }
 
 class LogInPage extends StatelessWidget {
@@ -53,16 +55,21 @@ class LogInPage extends StatelessWidget {
                             hintText: 'Enter your password',
                             labelText: 'Password',
                           ),
-                          obscureText: true,
+                          obscureText: false,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton(
                             onPressed: () {
-                              //move to dashboard screen
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PageDashboard()),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green, // Background color
+                              backgroundColor: Colors.green,
                             ),
                             child: const Text('Login'),
                           ),

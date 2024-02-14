@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './ninjas.dart';
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({super.key});
+class PageDashboard extends StatelessWidget {
+  const PageDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +39,7 @@ class Dashboard extends StatelessWidget {
                           label: 'Ninjas',
                           fontSize: 30,
                           fontWeight: FontWeight.w400,
+                          color: const Color.fromARGB(255, 0, 0, 0),
                           onPressed: () {
                             // what happens when the ninjas button is pressed
                           },
@@ -90,6 +91,7 @@ class Dashboard extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 padding: EdgeInsets.zero,
+                backgroundColor: const Color.fromARGB(0, 255, 255, 255),
               ),
               child: SizedBox(
                 child: Text(
