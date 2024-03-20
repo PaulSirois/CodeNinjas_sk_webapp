@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './ninjas.dart';
+import './main.dart';
 
 class PageDashboard extends StatelessWidget {
   const PageDashboard({super.key});
@@ -45,7 +46,7 @@ class PageDashboard extends StatelessWidget {
                           },
                         ),
                         const Spacer(),
-                        _buildLogoutButton(),
+                        _buildLogoutButton(context),
                       ],
                     ),
                   ),
@@ -107,12 +108,15 @@ class PageDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildLogoutButton() {
+  Widget _buildLogoutButton(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: TextButton(
         onPressed: () {
-          // what happens when the logout button is pressed
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LogInPage()),
+          );
         },
         child: const Text(
           'Logout',

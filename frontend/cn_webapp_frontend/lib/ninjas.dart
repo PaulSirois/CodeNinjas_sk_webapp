@@ -9,6 +9,14 @@ class NinjasTable extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const Text(
+            'Dashboard',
+            style: TextStyle(
+              fontSize: 70,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Align(
@@ -26,9 +34,9 @@ class NinjasTable extends StatelessWidget {
             alignment: Alignment.center,
             child: Table(
               columnWidths: const <int, TableColumnWidth>{
-                0: FixedColumnWidth(400),
-                1: FixedColumnWidth(400),
-                2: FixedColumnWidth(400),
+                0: FixedColumnWidth(450),
+                1: FixedColumnWidth(450),
+                2: FixedColumnWidth(450),
               },
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               children: <TableRow>[
@@ -67,7 +75,7 @@ class NinjasTable extends StatelessWidget {
           ),
         ),
         child: const SizedBox(
-          height: 200,
+          height: 235,
           child: Center(
               // Add text or icons inside the button here
               ),
