@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'dashboard.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     home: LogInPage(),
   ));
 }
 
 class LogInPage extends StatelessWidget {
-  const LogInPage({super.key});
+  LogInPage({super.key});
+
+  static const String validUsername = "Admin";
+  static const String validPassword = "AdminPass";
+
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +39,10 @@ class LogInPage extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20.0),
                     child: Text(
                       'Login',
-                      style:
-                          TextStyle(fontSize: 240, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 200,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -45,28 +53,53 @@ class LogInPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: _usernameController,
                           decoration: const InputDecoration(
                             hintText: 'Enter your username',
                             labelText: 'Username',
                           ),
                         ),
                         TextFormField(
+                          controller: _passwordController,
                           decoration: const InputDecoration(
                             hintText: 'Enter your password',
                             labelText: 'Password',
                           ),
-                          obscureText: false,
+                          obscureText: true,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PageDashboard()),
-                              );
+                              if (_usernameController.text == validUsername &&
+                                  _passwordController.text == validPassword) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PageDashboard(
+                                        username: _usernameController.text),
+                                  ),
+                                );
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Error"),
+                                      content: const Text(
+                                          "Invalid username or password."),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text("OK"),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
