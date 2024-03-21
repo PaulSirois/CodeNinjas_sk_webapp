@@ -21,18 +21,10 @@ CREATE TABLE IF NOT EXISTS new_senseis (
     PRIMARY KEY (name));
 CREATE TABLE IF NOT EXISTS ninjas (
     name varchar(100),
-    belt enum('white', 'yellow', 'orange', 'green', 'blue', 'purple', 'brown', 'red', 'black'),
-    level tinyint unsigned, constraint level_out_of_range check (level <= 0 and level >= 13),
-    activity tinyint unsigned, constraint activity_out_of_range check (activity <= 0 and activity >= 6),
-    laptop_number tinyint,
-    coins smallint unsigned);
-CREATE TABLE IF NOT EXISTS levels (
-    id int auto_increment,
-    name varchar(50) not null,
-    belt enum('white', 'yellow', 'orange', 'green', 'blue', 'purple', 'brown', 'red', 'black'),
-    level tinyint unsigned, constraint level_out_of_range check (level <= 0 and level >= 13),
-    activity tinyint unsigned, constraint activity_out_of_range check (activity <= 0 and activity >= 6)
-);
+    belt enum('white', 'yellow', 'orange', 'green', 'blue', 'purple', 'brown', 'red', 'black') not null,
+    level varchar(32) not null,
+    coins smallint unsigned,
+    last_checkin timestamp);
 INSERT INTO users (id_bin, name, password, role) VALUES (UNHEX(REPLACE(UUID(),'-','')), 'SUPERUSER', 'ADMINPASSWORD', 'admin')
 ON DUPLICATE KEY UPDATE id_bin=UNHEX(REPLACE(UUID(),'-',''));
 # CREATE USER 'postit-user'@'localhost' IDENTIFIED BY 'postIT-super-secret-password';
