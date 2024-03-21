@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import './ninjas.dart';
+import './main.dart';
 
 class PageDashboard extends StatelessWidget {
-  const PageDashboard({super.key});
+  final String username;
+
+  const PageDashboard({required this.username, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +29,12 @@ class PageDashboard extends StatelessWidget {
                       children: [
                         _buildIconButton(
                           icon: Icons.account_circle,
-                          label: 'Admin',
+                          label: username,
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: const Color.fromARGB(255, 0, 0, 0),
                           onPressed: () {
-                            // what happens when the admins button is pressed
+                            // What happens when the admin's button is pressed
                           },
                         ),
                         _buildIconButton(
@@ -45,7 +48,7 @@ class PageDashboard extends StatelessWidget {
                           },
                         ),
                         const Spacer(),
-                        _buildLogoutButton(),
+                        _buildLogoutButton(context),
                       ],
                     ),
                   ),
@@ -82,22 +85,31 @@ class PageDashboard extends StatelessWidget {
             size: 60,
           ),
         ),
-        Align(
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: ElevatedButton(
-              onPressed: onPressed,
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-              ),
-              child: SizedBox(
-                child: Text(
-                  label,
-                  style: TextStyle(
-                      fontSize: fontSize, fontWeight: fontWeight, color: color),
+        Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                  backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+                ),
+                child: SizedBox(
+                  height: 60, // Limiting height to ensure text fits
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: fontSize,
+                        fontWeight: fontWeight,
+                        color: color,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -107,12 +119,15 @@ class PageDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildLogoutButton() {
+  Widget _buildLogoutButton(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: TextButton(
         onPressed: () {
-          // what happens when the logout button is pressed
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => LogInPage()),
+          );
         },
         child: const Text(
           'Logout',
