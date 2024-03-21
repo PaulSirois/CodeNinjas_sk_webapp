@@ -10,7 +10,8 @@ void main() {
 class LogInPage extends StatelessWidget {
   LogInPage({super.key});
 
-  static const String validUsername = "Admin";
+  static const String validUsername =
+      "Admin"; //Note: set this to be one of the usernames from the sql file
   static const String validPassword = "AdminPass";
 
   final TextEditingController _usernameController = TextEditingController();
