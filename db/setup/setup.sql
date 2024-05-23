@@ -13,14 +13,14 @@ CREATE TABLE IF NOT EXISTS users
         ) virtual,
         name varchar(200) NOT NULL UNIQUE,
         password varchar(200) NOT NULL,
-        role ENUM('sensei', 'front-desk', 'admin'),
+        role enum('sensei', 'front-desk', 'admin'),
         PRIMARY KEY (id_bin));
 CREATE TABLE IF NOT EXISTS new_senseis (
     name varchar(200) NOT NULL UNIQUE,
-    role ENUM('sensei', 'front-desk', 'admin'),
+    role enum('sensei', 'front-desk', 'admin'),
     PRIMARY KEY (name));
 CREATE TABLE IF NOT EXISTS ninjas (
-    name varchar(100),
+    name varchar(50) not null,
     belt enum('white', 'yellow', 'orange', 'green', 'blue', 'purple', 'brown', 'red', 'black') not null,
     level varchar(32) not null,
     coins smallint unsigned,

@@ -35,7 +35,7 @@ db.getConnection((err, connection) => {
 /**
  * Adds a user to the new senseis table if they don't exist in the users table
  */
-app.post('/admin/createUser',(req, res) => {
+app.post('/admin/create-user', (req, res) => {
     const val = [req.body.username, req.body.role];
 
     const queryCheck = `SELECT name FROM users WHERE name = ?`
@@ -62,6 +62,40 @@ app.post('/admin/createUser',(req, res) => {
             }
             connection.release();
         });
+    });
+});
+
+/**
+ * Remove a user from the users and new senseis table table
+ */
+app.delete('/admin/delete-user', (req, res) => {
+    const val = [req.body.username];
+
+    const queryUsers = `DELETE FROM users WHERE name = ?`;
+    const queryNewSenseis = `DELETE FROM new_senseis WHERE name = ?`;
+
+    db.getConnection((err, connection) => {
+        connection.query(queryUsers, val[0], (err, data) => {
+            if (err) {
+                console.error('Error deleting for user in users:', err);
+                res.json({status: 500, message: err});
+            } else {
+                console.log('Removed user from users table', val[0]);
+                res.json({status: 200, message: 'User removed successfully by admin from users table'});
+            }
+        }).then(
+            connection.query(queryNewSenseis, val[0], (err, data) => {
+                if (err) {
+                    console.error('Error deleting for user in new_senseis:', err);
+                    res.json({status: 500, message: err});
+                } else {
+                    console.log('Removed user from new_senseis table', val[0]);
+                    res.json({status: 200, message: 'User removed successfully by admin from new_senseis table'});
+                }
+            }).then(
+                connection.release()
+            )
+        );
     });
 });
 
